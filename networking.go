@@ -36,8 +36,7 @@ func main() {
 
 				binderId := fmt.Sprintf("%d-%d-%d-%d", srcIp, srcPort, dstIp, dstPort)
 
-				tcpSequenceNoBytes := data[38:42]
-				tcpSequenceNo := uint32(tcpSequenceNoBytes[0])<<24 | uint32(tcpSequenceNoBytes[1])<<16 | uint32(tcpSequenceNoBytes[2])<<8 | uint32(tcpSequenceNoBytes[3])<<0
+				tcpSequenceNo := uint32(data[38])<<24 | uint32(data[39])<<16 | uint32(data[40])<<8 | uint32(data[41])<<0
 
 				payloadSize := len(data) - ipHeaderSize - tcpHeaderSize
 
