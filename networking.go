@@ -28,11 +28,8 @@ func main() {
 				ipHeaderSize := int(data[14]&0x0F) * 4
 				tcpHeaderSize := int(data[46]>>4) * 4
 
-				srcIPBytes := data[26:30]
-				dstIPBytes := data[30:34]
-
-				srcIP := fmt.Sprintf("%d.%d.%d.%d", srcIPBytes[0], srcIPBytes[1], srcIPBytes[2], srcIPBytes[3])
-				dstIP := fmt.Sprintf("%d.%d.%d.%d", dstIPBytes[0], dstIPBytes[1], dstIPBytes[2], dstIPBytes[3])
+				srcIP := fmt.Sprintf("%d.%d.%d.%d", data[26], data[27], data[28], data[29])
+				dstIP := fmt.Sprintf("%d.%d.%d.%d", data[30], data[31], data[32], data[33])
 
 				srcPort := uint16(data[34])<<8 | uint16(data[35])
 				dstPort := uint16(data[36])<<8 | uint16(data[37])
@@ -91,7 +88,7 @@ func main() {
 					fmt.Printf("\nPayload: %s", reqPayload)
 					fmt.Println("\n----")
 
-					reqPayload += ""
+					reqPayload = ""
 				}
 
 				if packetType == "[RESPONSE]" && info == "[ACK] [FIN] " {
@@ -106,7 +103,7 @@ func main() {
 					fmt.Printf("\nPayload: %s", respPayload)
 					fmt.Println("\n----")
 
-					respPayload += ""
+					respPayload = ""
 				}
 			}
 		}
