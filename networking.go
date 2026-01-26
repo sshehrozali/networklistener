@@ -49,6 +49,7 @@ func (tsf *tcpstreamfactory) New(net, transport gopacket.Flow) tcpassembly.Strea
 }
 
 func main() {
+	fmt.Println("Started...")
 
 	tsf := &tcpstreamfactory{}
 	pool := tcpassembly.NewStreamPool(tsf)
