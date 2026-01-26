@@ -70,9 +70,13 @@ func main() {
 			packets := gopacket.NewPacketSource(handle, handle.LinkType())
 
 			for packet := range packets.Packets() {
+				fmt.Printf("Packet captured on eth0: %v\n", packet)
 				tcpLayer := packet.Layer(layers.LayerTypeTCP)
 				if tcpLayer != nil {
 					tcp := tcpLayer.(*layers.TCP)
+					fmt.Printf("TCP packet: %s:%d -> %s:%d\n", 
+						packet.NetworkLayer().NetworkFlow().Src(), tcp.SrcPort,
+						packet.NetworkLayer().NetworkFlow().Dst(), tcp.DstPort)
 					assembler.Assemble(packet.NetworkLayer().NetworkFlow(), tcp)
 				}
 			}
