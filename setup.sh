@@ -13,7 +13,7 @@ if kind get clusters | grep -q "^kind$"; then
     echo "Cluster 'kind' already exists. Deleting..."
     kind delete cluster
 fi
-kind create cluster --config kind-config.yaml
+kind create cluster --config kubernetes/kind-config.yaml
 echo "✓ Cluster created"
 echo ""
 
@@ -31,19 +31,19 @@ echo ""
 
 # Step 4: Deploy nginx
 echo "Step 4: Deploying nginx..."
-kubectl apply -f nginx-deployment.yaml
+kubectl apply -f kubernetes/nginx-deployment.yaml
 echo "✓ Nginx deployed"
 echo ""
 
 # Step 5: Deploy packet sniffer
 echo "Step 5: Deploying packet sniffer DaemonSet..."
-kubectl apply -f daemonset.yaml
+kubectl apply -f kubernetes/daemonset.yaml
 echo "✓ Packet sniffer deployed"
 echo ""
 
 # Step 6: Deploy curl pod
 echo "Step 6: Deploying curl pod for testing..."
-kubectl apply -f curl-deployment.yaml
+kubectl apply -f kubernetes/curl-deployment.yaml
 echo "✓ Curl pod deployed"
 echo ""
 
